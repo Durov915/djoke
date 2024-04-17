@@ -30,6 +30,7 @@
         padding: 20px;
         margin: 20px;
         max-width: 400px;
+        margin-top: 70px;
       }
 
       .joke {
@@ -62,7 +63,7 @@
 
       p {
         font-size: 15px;
-        font-family: cursive;
+        font-family: 'Times New Roman', Times, serif;
         color: #575757;
         font-weight: 700;
       }
@@ -77,20 +78,20 @@
           data-aos-duration="1500"
           src="logo.png"
           alt="D-Joke Logo"
-      /></a>
+        />
+      </a>
     </div>
-
+  
     <div class="container">
       <div class="card" data-aos="flip-up" data-aos-duration="1800">
-        <div class="joke">
-          <strong>Programmers prefer dark mode </strong> <br />Because light
-          attracts bugs.
+        <div class="joke" id="jokeText">
+          <!-- Joke will be displayed here -->
         </div>
       </div>
     </div>
-
+  
     <div class="container" data-aos="flip-right" data-aos-duration="2300">
-      <button class="getJokeBtn">Next Joke</button>
+      <button class="getJokeBtn" onclick="fetchJoke()">Next Joke</button>
     </div>
     <div
       data-aos="fade-up"
@@ -105,9 +106,8 @@
       AOS.init();
     </script>
     <!-- aos animation -->
-
+  
     <!-- dark mode -->
-
     <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
     <script>
       function addDarkmodeWidget() {
@@ -115,8 +115,26 @@
       }
       window.addEventListener("load", addDarkmodeWidget);
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/darkmode-js/darkmode-js.min.js"></script>
-
     <!-- dark mode -->
+  
+    <script>
+      function fetchJoke() {
+        fetch('https://icanhazdadjoke.com/', {
+          headers: {
+            'Accept': 'application/json'
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('jokeText').innerHTML = `<strong>${data.joke}</strong>`;
+        })
+        .catch(error => {
+          console.error('Error fetching joke:', error);
+          document.getElementById('jokeText').innerHTML = `<strong>Failed to fetch joke.</strong>`;
+        });
+      }
+  
+      window.addEventListener('load', fetchJoke);
+    </script> 
   </body>
-</html>
+  </html>
