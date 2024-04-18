@@ -119,32 +119,7 @@
     </script>
     <!-- dark mode -->
   
-<script>
-  function fetchJoke() {
-    fetch('https://icanhazdadjoke.com/', {
-      headers: {
-        'Accept': 'application/json'
-      }
-    })
-    .then(response => response.json())
-    .then(data => {
-      // Update the joke text
-      document.getElementById('jokeText').innerHTML = `<strong>${data.joke}</strong>`;
-      // Trigger animation by adding the animation class
-      document.querySelector('.card').classList.add('animate');
-      // Remove animation class after a delay to reset animation
-      setTimeout(() => {
-        document.querySelector('.card').classList.remove('animate');
-      }, 2000); // Adjust the delay time according to your preference
-    })
-    .catch(error => {
-      console.error('Error fetching joke:', error);
-      document.getElementById('jokeText').innerHTML = `<strong>Failed to fetch joke.</strong>`;
-    });
-  }
-
-  window.addEventListener('load', fetchJoke);
-</script>
+<script> function fetchJoke() { fetch('https://icanhazdadjoke.com/', { headers: { 'Accept': 'application/json' } }) .then(response => response.json()) .then(data => { document.getElementById('jokeText').innerHTML = `<strong>${data.joke}</strong>`; }) .catch(error => { console.error('Error fetching joke:', error); document.getElementById('jokeText').innerHTML = `<strong>Failed to fetch joke.</strong>`; }); } window.addEventListener('load', fetchJoke); </script>
 
   </body>
   </html>
